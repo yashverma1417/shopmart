@@ -1,0 +1,75 @@
+{% extends 'seller/dashboard.html' %}
+
+{% block bodyblock %}
+<style>
+  img{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 1px solid black;
+    transition: transform 1s ease-in-out;
+  }
+  img:hover
+  {
+    transform: scale(3);
+    border: 0px solid black;
+    border-radius: 10%;
+  }
+</style>
+<div class="container">
+   <div class="row">
+      <div class="col d-flex flex-column align-items-center">
+         <h1>Manage your Products</h1>
+        
+         
+         {% if total_products == 0 %}
+            <h3>There are no products found, <a href="/seller/categories">click here</a> to add product</h3>
+          {% else %}
+          <table class="table table-hover table-bordered mt-3 w-50 text-center">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">IMAGE</th>
+                <th scope="col">NAME</th>
+                <th scope="col">PRICE</th>
+                <th scope="col">QUANTITY</th>
+                <th scope="col">CATEGORY</th>
+                <th scope="col">DESCRIPTION</th>
+                <th scope="col" colspan="2">ACTION</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+               
+            {% for product in products %}   
+              <tr>
+                <th scope="row">{{product.id}}</th>
+                <th scope="row">
+                  <img src="http://127.0.0.1:8000/seller/media/{{product.image}}" alt="">
+                </th>
+                <td >{{product.name|title}}</td>
+                <td >{{product.price}}</td>
+                <td >{{product.quantity}}</td>
+                <td >{{product.category_id.name}}</td>
+                <td >{{product.description}}</td>
+                
+                <td>
+                  <a href="/seller/products/update/{{product.id}}" class="btn btn-warning">Update</a>
+                </td>
+                <td>
+                  <a href="/seller/products/delete/{{product.id}}" class="btn btn-danger">Delete</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+         {% endif %}     
+
+
+       </div>
+   </div>
+</div>
+      
+
+    
+{% endblock bodyblock %}

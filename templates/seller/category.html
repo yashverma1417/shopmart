@@ -1,0 +1,54 @@
+{% extends 'seller/dashboard.html' %}
+
+{% block bodyblock %}
+<div class="container">
+   <div class="row">
+      <div class="col d-flex flex-column align-items-center">
+         <h1>Manage your Categories</h1>
+         <form method="POST" class="w-50">
+            {% csrf_token %}
+           
+         {% if  error_msg %}    
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+             {{error_msg}}
+             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+           </div>
+         {% endif %}
+           <div class="mb-3">
+             <!-- <label for="username" class="form-label">Category Name:</label> -->
+             <input type="text" class="form-control" id="category" name="category">
+           </div>
+           <input type="submit" class="btn btn-primary w-100" value="Add Category">  
+         </form>
+
+         <table class="table table-hover table-bordered mt-3 w-50 text-center">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Category</th>
+                <th scope="col" colspan="2">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+               
+            {% for category in categories %}   
+              <tr>
+                <th scope="row">{{category.id}}</th>
+                <td >{{category.name|title}}</td>
+                <td>
+                  <a href="/seller/categories/delete/{{category.id}}" class="btn btn-danger">Delete</a>
+                </td>
+                <td>
+                  <a href="/seller/categories/add-product/{{category.id}}" class="btn btn-success">Add Product</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+       </div>
+   </div>
+</div>
+      
+
+    
+{% endblock bodyblock %}

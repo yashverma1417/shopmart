@@ -1,0 +1,49 @@
+
+{% extends 'customer/base.html' %}
+
+{% block bodyblock %}
+
+<div class="container">
+   <h1>Shopping Cart</h1>
+   <div class="row">
+      <!-- cart details  -->
+      <div class="col-8">
+         <hr>
+         
+         {% for cart_item in cart_items %}  
+         <div class="row">
+            <!-- display image  -->
+            <div class="col-4">
+               <img src="http://127.0.0.1:8000/seller/media/{{cart_item.product_id.image}}" alt="">
+            </div>
+            <!-- display product details  -->
+            <div class="col-8 mb-3">
+               <h1>{{cart_item.product_id.name|title}}</h1>
+               <p>{{cart_item.product_id.description}}</p>
+               <p>&#x20b9; {{cart_item.product_id.price}}</p>
+               <p>rating value</p>
+               <a href="/cart/dec/{{cart_item.id}}" class="btn btn-danger">-</a>
+               <input type="number" value="{{cart_item.quantity}}" class="text-center" disabled>
+               <a href="/cart/inc/{{cart_item.id}}" class="btn btn-success">+</a>
+               <a href="/cart/delete/{{cart_item.id}}" class="btn btn-danger">delete</a>
+            </div>
+         </div>
+         <hr>
+         {% endfor %}
+         
+      </div>
+
+
+      <!-- total items and price details  -->
+      <div class="col-4 border h-50 p-3">
+         <h1 class="bg-warning">Hello, {{user.username|title}}</h1>
+         <hr>
+         <h2>Total Items : {{quantity}}</h2>
+         <h3>Total Price : &#x20b9; {{total_price}}</h3>
+         
+         <a href="/order-summary" class="btn btn-primary w-100">Place order</a>
+      </div>
+   </div>
+</div>
+
+{% endblock bodyblock %}

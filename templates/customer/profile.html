@@ -1,0 +1,98 @@
+
+{% extends 'customer/base.html' %}
+
+
+{% block bodyblock %}
+<style>
+   body {
+      background-color: #cfd6ef;;
+   }
+</style>
+<div class="container mt-4 h-100">
+   <div class="row">
+      <div class="col-3 bg-light d-flex align-items-center justify-content-center flex-column rounded">
+         <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" height="100px" width="100px" style="border-radius: 50%;" class="mt-2">
+         
+         {% if user.first_name %}
+            <h3>{{user.first_name|title}} {{user.last_name|title}}</h3>
+            <p class="text-secondary">{{user.email}}</p>
+         {% else %}
+            <h3>Your Name</h3>
+            <p class="text-secondary"> your email address</p>
+         {% endif %}
+            
+         
+
+         <h3 class="text-primary mt-5">About</h3>
+         <p class="text-center">I'm Yuki. Full Stack Designer I enjoy creating user-centric, delightful and human experiences.</p>
+      </div>
+      <div class="col-1"></div>
+      <div class="col-8 bg-light rounded">
+         <form method="POST">
+            {% csrf_token %}
+         <h5 class="text-primary mt-2">Personal Details</h5>
+            <div class="row mt-3">
+               <div class="col-6">
+                  <div class="mb-3">
+                     <label for="firstname" class="form-label">First Name</label>
+                     <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter First Name" value="{{user.first_name}}">
+                  </div>
+               </div>
+               <div class="col-6">
+                  <div class="mb-3">
+                     <label for="lastname" class="form-label">Last Name</label>
+                     <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter Last Name" value="{{user.last_name}}">
+                  </div>
+               </div>
+               <div class="col-6">
+                  <div class="mb-3">
+                     <label for="email" class="form-label">Email</label>
+                     <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" value="{{user.email}}">
+                  </div>
+               </div>
+               <div class="col-6">
+                  <div class="mb-3">
+                     <label for="contact" class="form-label">Contact</label>
+                     <input type="tel" class="form-control" id="contact" name="contact" placeholder="Enter Contact" value="{{address.contact}}">
+                  </div>
+               </div>
+            </div>
+         
+            <h5 class="text-primary mt-2">Address</h5>
+            <div class="row mt-3">
+               <div class="col-6">
+                  <div class="mb-3">
+                     <label for="street" class="form-label">Street</label>
+                     <input type="text" class="form-control" id="street" name="street" placeholder="Enter Street" value="{{address.street}}">
+                  </div>
+               </div>
+               <div class="col-6">
+                  <div class="mb-3">
+                     <label for="city" class="form-label">City</label>
+                     <input type="text" class="form-control" id="city" name="city" placeholder="Enter City" value="{{address.city}}">
+                  </div>
+               </div>
+               <div class="col-6">
+                  <div class="mb-3">
+                     <label for="state" class="form-label">State</label>
+                     <input type="text" class="form-control" id="state" name="state" placeholder="Enter State" value="{{address.state}}">
+                  </div>
+               </div>
+               <div class="col-6">
+                  <div class="mb-3">
+                     <label for="pincode" class="form-label">Pin Code</label>
+                     <input type="number" class="form-control" id="pincode" name="pincode" placeholder="Enter PinCode" value="{{address.pincode}}">
+                  </div>
+               </div>
+            </div>
+            <div class="mb-4 d-flex justify-content-end">
+               <input type="reset" value="Reset" class="btn btn-secondary me-2">
+               <input type="submit" value="Update" class="btn btn-primary">
+            </div>
+
+         </form>
+      </div>
+   </div>
+</div>
+{% endblock bodyblock %}
+   
